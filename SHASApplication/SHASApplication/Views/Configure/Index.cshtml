@@ -1,0 +1,41 @@
+﻿@model IEnumerable<SHASApplication.Models.device>
+
+@{
+    ViewBag.Title = "Configure";
+}
+@section HeadContent {
+<style>
+    .bordered {
+        max-width:300px;
+        border:1px solid #cc3;
+        background: center no-repeat url('@Url.Content("~/Content/Kendo/shared/world-map.png")');
+        height: 125px;
+        float:left;
+    }
+</style>
+}
+
+<h2 style="float:left; ">Configure Devices</h2>
+<p style="visibility:hidden; clear:both; float:left"></p>
+@foreach (var item in Model) {
+    if (item.DeviceStatus.Equals("ON")) 
+    {
+        @Html.Partial("_ConfigDeviceTileON", item);    
+    } 
+    else 
+    { 
+        @Html.Partial("_ConfigDeviceTileOFF", item);
+    } 
+}
+
+<p style="visibility:hidden; clear:both; float:left"></p>
+<div style="float:left; clear:both">
+    <h2 style="float:left; clear:both">Configure Alerts</h2>
+    <h3 style="float:left; clear:both">@Html.ActionLink("User Alerts", "Index", "ConfigureAlert")</h3>
+    <h3 style="float:left; clear:both">@Html.ActionLink("Emergency Authorities", "Index", "ConfigEmergencyAuthorities")</h3>
+</div>
+<p style="visibility:hidden; clear:both; float:left"></p>
+<div style="float:left; clear:both">
+    <h2 style="float:left; clear:both">Manage Devices</h2>
+    <h3 style="float:left; clear:both">@Html.ActionLink("Device List", "Index", "Device")</h3>
+</div>

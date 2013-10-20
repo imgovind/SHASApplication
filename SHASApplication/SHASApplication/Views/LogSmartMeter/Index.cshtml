@@ -1,0 +1,208 @@
+﻿@model IEnumerable<SHASApplication.Models.logsmartmeter>
+@{
+    ViewBag.Title = "Index";
+}
+
+@section HeadContent {
+<style>
+    .chart-wrapper {
+        position: relative;
+    }
+
+    .chart-wrapper ul {
+        font-size: 11px;
+        margin: 53px 20px 0 0;
+        padding: 30px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        text-transform: uppercase;
+        width: 150px;
+        height: 105px;
+    }
+</style>
+}
+<p></p>
+<h2>Chart #1 - Energy Usage Vs Water Usage Vs Hours Operated - For every Device</h2>
+<p>
+    This chart on x axis shows the usage of energy,
+    on the y axis shows the usage of water,
+    the size of the bubble shows the duration each device operated.
+</p>
+<div class="chart-wrapper">
+    @(Html.Kendo().Chart()
+        .Name("chart")
+        .Title("Overall System")
+        .Legend(false)
+        .Series(series => {
+            series.Bubble(@ViewBag.BubbleDumba);
+        })
+        .XAxis(axis => axis
+            .Numeric()
+            .Labels(labels => labels
+                .Format("{0:N0}")
+                .Skip(1)
+            )
+            .AxisCrossingValue(-10)
+            .MajorUnit(1)
+            .PlotBands(plotBands => plotBands
+                .Add(-10, 0, "#00f").Opacity(0.05)
+            )
+        )
+        .YAxis(axis => axis
+            .Numeric()
+            .Labels(labels => labels
+                .Format("{0:N0}")
+            )
+            .Line(line => line
+                .Width(0)
+            )
+        )
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Format("{3}: {2:N0} applications")
+            .Opacity(1)
+        )
+    )
+    <ul class="k-content">
+        <li>Circle size shows number of instances the device was ON</li>
+        <li>Vertical position shows Water Usage</li>
+        <li>Horizontal position shows Energy Usage</li>
+    </ul>
+</div>
+<p></p>
+<hr />
+<h2>Chart #2 - Energy Usage split by all devices</h2>
+<p>
+    This simple pie chart shows the energy split by each device depicted by their respective pie.
+</p>
+<div class="chart-wrapper">
+    @(Html.Kendo().Chart()
+        .Name("chart2")
+                .Title(title => title
+                    .Text("Energy Usage")
+                    .Position(ChartTitlePosition.Top))
+        .Legend(legend => legend
+            .Visible(false)
+        )
+        .Series(series => {
+            series.Pie(new dynamic[] {
+                new {category="Thermostat",value=@ViewBag.tEU,color="green"},
+                new {category="Shower",value=@ViewBag.shoEU,color="orange"},
+                new {category="Sprinkler",value=@ViewBag.sprEU,color="red"},
+                new {category="Refrigerator",value=@ViewBag.reEU,color="blue"},
+            })
+            .Labels(labels => labels
+                .Template("#= category #: #= value#KwH")
+                .Background("transparent")
+                .Visible(true)
+            )
+            .StartAngle(150);
+        })
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Format("{0}KwH")
+        )
+    ) 
+</div>
+<p></p>
+<hr />
+<h2>Chart #3 - Water Usage split by all devices</h2>
+<p>
+    This simple chart shows the water usage split by each device depicted by their respective pie.
+</p>
+<div class="chart-wrapper">
+    @(Html.Kendo().Chart()
+        .Name("chart3")
+                .Title(title => title
+                    .Text("Water Usage")
+                    .Position(ChartTitlePosition.Top))
+        .Legend(legend => legend
+            .Visible(false)
+        )
+        .Series(series => {
+            series.Pie(new dynamic[] {
+                new {category="Thermostat",value=@ViewBag.tWU,color="green"},
+                new {category="Shower",value=@ViewBag.shoWU,color="orange"},
+                new {category="Sprinkler",value=@ViewBag.sprWU,color="red"},
+                new {category="Refrigerator",value=@ViewBag.reWU,color="blue"},
+            })
+            .Labels(labels => labels
+                .Template("#= category #: #= value#GPM")
+                .Background("transparent")
+                .Visible(true)
+            )
+            .StartAngle(150);
+        })
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Format("{0}GPM")
+        )
+    ) 
+</div>
+<p></p>
+<hr />
+<h2>Raw Data - Smart Meter</h2>
+<div>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DeviceID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnergyUsed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WaterUsed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeStamp)
+            </th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @foreach (KeyValuePair<string, string> itemer in ViewBag.DeviceDictionary)
+                { 
+                    if(itemer.Key.Equals(item.DeviceID.ToString())) 
+                    {
+                        <label>@itemer.Value</label>    
+                    }    
+                }
+            </td>
+            <td>
+                @if (item.EnergyUsed.Equals("NULL")) 
+                { 
+                    <label>0</label>
+                } 
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.EnergyUsed)
+                }
+            </td>
+            <td>
+                @if (item.WaterUsed.Equals("NULL")) 
+                { 
+                    <label>0</label>
+                } 
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.WaterUsed)
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeStamp)
+            </td>
+            <td>
+                <!--
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) 
+                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+                -->
+            </td>
+        </tr>
+    }
+
+    </table>
+</div>

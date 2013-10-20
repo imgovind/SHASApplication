@@ -1,0 +1,226 @@
+﻿@model IEnumerable<SHASApplication.Models.logsmartshower>
+@{
+    ViewBag.Title = "Index";
+}
+
+<p></p>
+<h2>Chart #1 - Device Status by Water Flow Status</h2>
+<p>
+    This chart shows the flow of water and the device status with respect to time.
+</p>
+<div class="chart-wrapper">
+    @(Html.Kendo().Chart(Model)
+        .Name("chart1")
+        .Title("Device Status | Water Status")
+        .Legend(legend => legend
+            .Position(ChartLegendPosition.Bottom)
+        )
+        .Series(series => {
+            series.Area(m => m.DeviceStatus).Name("Device Status");
+            series.Line(m => m.WaterStatus).Name("Water Flow Status");
+        })
+        .CategoryAxis(axis => axis
+            .Categories(ViewBag.TimeLineStampMoney)
+        )
+        .ValueAxis(axis => axis.Numeric()
+            .Labels(labels => labels.Format("{0}"))
+        )
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Format("{0}")
+            .Template("#= series.name #: #= value #")
+        )
+    ) 
+</div>
+<p></p>
+<hr />
+<h2>Chart #2 - Water Savings </h2>
+<p>
+    This chart shows the amount of Water saved pie, 
+    which would have otherwise been spent if we did not use SHAS. 
+    The full pie shows the Water that would have been spent without SHAS, 
+    the Water saved pie shows the current savings of Water
+</p>
+<div class="chart-wrapper">
+    @(Html.Kendo().Chart()
+        .Name("chart2")
+                .Title(title => title
+                    .Text("Water Spent vs Water Saved")
+                    .Position(ChartTitlePosition.Top))
+        .Legend(legend => legend
+            .Visible(false)
+        )
+        .Series(series => {
+            series.Pie(new dynamic[] {
+                new {category="Water Spent",value=@ViewBag.eSpent,color="#9de219"},
+                new {category="Water Saved",value=@ViewBag.eSaved,color="#068c35"},
+            })
+            .Labels(labels => labels
+                .Template("#= category #: #= value#Gallons")
+                .Background("transparent")
+                .Visible(true)
+            )
+            .StartAngle(150);
+        })
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Format("{0}Gallons")
+        )
+    ) 
+</div>
+<p></p>
+<hr />
+<h2>Chart #3 - Water Usage by flow status</h2>
+<p>
+    This chart shows the water usage and the hours operated with respect to time.
+    The inner donut shows the hours operated under each flow status.
+    The outer donut shows the water usage under each flow status.
+</p>
+<div class="chart-wrapper">
+    @(Html.Kendo().Chart()
+        .Name("chart3")
+        .Title(title => title
+            .Text("Water Usage")
+            .Position(ChartTitlePosition.Top)
+        )
+        .Legend(legend => legend
+            .Visible(false)
+        )
+        .SeriesDefaults(series =>
+            series.Donut().StartAngle(150)
+        )
+        .Series(series =>
+        {
+            series.Donut(new dynamic[] {
+                new {category = "FULL",value = @ViewBag.flowMM, color="blue"},
+                new {category = "IDLE",value = @ViewBag.noflMM, color = "#85ADAD"},
+            })
+            .Name("Minutes Operated")
+            ;
+            series.Donut(new dynamic[] {
+                new {category = "FULL",value = @ViewBag.flowMU, color="red"},
+                new {category = "IDLE",value = @ViewBag.noflMu, color = "#85ADAD"}
+            })
+            .Name("Water Usage")
+            .Labels(labels => labels
+                .Visible(true)
+                .Position(ChartPieLabelsPosition.OutsideEnd)
+                .Template("#= category #: #= value#Gallons")
+                .Background("transparent")
+            );
+        })
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Template("#= category # (#= series.name #): #= value #")
+        )
+    ) 
+</div>
+
+<p></p>
+<hr />
+<h2>Chart #4 - Water Usage split by Time</h2>
+<p>
+    This chart shows the water usage by Smart Shower at a given point of time
+</p>
+<div class="chart-wrapper">
+    @(Html.Kendo().Chart(Model)
+        .Name("chart4")
+        .Title("Water Usage at given time")
+        .Legend(legend => legend
+            .Visible(false)
+        )
+        .ChartArea(chartArea => chartArea
+            .Background("transparent")
+        )
+        .Series(series => {
+            series.Bar(@ViewBag.GContainer).Name("Water Usage");
+        })
+        .CategoryAxis(axis => axis
+            .Categories(m => m.TimeStamp)
+            .MajorGridLines(lines => lines.Visible(false))
+        )
+        .ValueAxis(axis => axis
+            .Numeric()
+            .Max(4)
+            .Line(line => line.Visible(false))
+            .MajorGridLines(lines => lines.Visible(true))
+        )
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Template("#= series.name #: #= value #GPM")
+        )
+    ) 
+</div>
+<p></p>
+<hr />
+<h2>Raw Data - Smart Shower</h2>
+
+<div style="clear:both; float:left;">
+
+    <table>
+        <tr>
+            <th>
+                <label>User</label>
+            </th>
+            <th>
+                <label>Temperature</label>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WaterStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeviceStatus)
+            </th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @foreach (KeyValuePair<string,string> itemer in ViewBag.UserDictionary) { 
+                    if(itemer.Key.Equals(item.UserSelection)) 
+                    {
+                        <label>@itemer.Value</label>    
+                    }    
+                }
+            </td>
+            <td>
+                @foreach (KeyValuePair<string,string> itemer in ViewBag.TempDictionary) { 
+                    if(itemer.Key.Equals(item.UserSelection)) 
+                    {
+                        <label>@itemer.Value</label>    
+                    }    
+                }
+            </td>
+            <td>
+                @if (item.WaterStatus.Equals("3")) 
+                { 
+                 <label style="color:red">FLOWING</label>
+                }
+                else if (item.WaterStatus.Equals("0")) 
+                { 
+                <label style="color:green">NOT FLOWING</label>          
+                }
+            </td>
+            <td>
+                @if (item.DeviceStatus.Equals("3")) 
+                { 
+                    <label style="color:red">ON</label>  
+                } 
+                else if (item.DeviceStatus.Equals("0")) 
+                { 
+                    <label style="color:green">OFF</label>             
+                }
+            </td>
+        
+            <td>
+                <!--
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) 
+                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+                -->
+            </td>
+        </tr>
+    }
+
+    </table>
+</div>

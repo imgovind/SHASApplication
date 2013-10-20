@@ -1,0 +1,43 @@
+﻿@model SHASApplication.Models.configsmartplug
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>configsmartplug</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.device.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.device.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.configdevicestatu.Status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.configdevicestatu.Status)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DeviceThreshold)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DeviceThreshold)
+    </div>
+    
+    <div class="display-label">
+         <label>Created On</label>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TimeStamp)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

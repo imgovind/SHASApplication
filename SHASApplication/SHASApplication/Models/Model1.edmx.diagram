@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cf6236f477d94cefb60e53873de17870" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="shasModel.configdevicestatu" Width="1.5" PointX="11.625" PointY="1.875" />
+        <EntityTypeShape EntityType="shasModel.configsmartplug" Width="1.5" PointX="9.125" PointY="1.875" />
+        <EntityTypeShape EntityType="shasModel.configsmartthermostat" Width="1.5" PointX="4.625" PointY="5" />
+        <EntityTypeShape EntityType="shasModel.device" Width="1.5" PointX="9.125" PointY="4.75" />
+        <EntityTypeShape EntityType="shasModel.logsmartmeter" Width="1.5" PointX="11.625" PointY="4.25" />
+        <EntityTypeShape EntityType="shasModel.logsmartrefrigerator" Width="1.5" PointX="11.75" PointY="6.875" />
+        <EntityTypeShape EntityType="shasModel.logsmartshower" Width="1.5" PointX="3.5" PointY="8.125" />
+        <EntityTypeShape EntityType="shasModel.logsmartsprinkler" Width="1.5" PointX="13.875" PointY="6.875" />
+        <EntityTypeShape EntityType="shasModel.logsmartwaterheater" Width="1.5" PointX="5.5" PointY="8.125" />
+        <EntityTypeShape EntityType="shasModel.logsthermostat" Width="1.5" PointX="9.5" PointY="7.625" />
+        <EntityTypeShape EntityType="shasModel.user" Width="1.5" PointX="7.375" PointY="7.375" />
+        <AssociationConnector Association="shasModel.StatusIDFromDeviceStatusTable" />
+        <AssociationConnector Association="shasModel.DeviceIDFromDevice" />
+        <EntityTypeShape EntityType="shasModel.configsmartshower" Width="1.5" PointX="1.75" PointY="3.875" />
+        <EntityTypeShape EntityType="shasModel.configsmartsprinkler" Width="1.5" PointX="3.875" PointY="1.625" />
+        <EntityTypeShape EntityType="shasModel.configsmartrefrigerator" Width="1.5" PointX="7" PointY="5" />
+        <EntityTypeShape EntityType="shasModel.configsmartwaterheater" Width="1.5" PointX="6.625" PointY="2.25" />
+        <EntityTypeShape EntityType="shasModel.configemergencyauthority" Width="1.5" PointX="1.75" PointY="6.75" />
+      </Diagram>
+      <Diagram DiagramId="19b7a076d45e40838232981519d89e87" Name="Diagram2" >
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

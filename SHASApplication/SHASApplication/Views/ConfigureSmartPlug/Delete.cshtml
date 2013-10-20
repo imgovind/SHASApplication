@@ -1,0 +1,47 @@
+﻿@model SHASApplication.Models.configsmartplug
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>configsmartplug</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.device.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.device.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.configdevicestatu.Status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.configdevicestatu.Status)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DeviceThreshold)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DeviceThreshold)
+    </div>
+    
+    <div class="display-label">
+         <label>Created On</label>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TimeStamp)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

@@ -1,0 +1,270 @@
+﻿@model IEnumerable<SHASApplication.Models.logsmartrefrigerator>
+@{
+    ViewBag.Title = "Index";
+}
+
+<p></p>
+<h2>Chart #1 - Device Status Vs Energy Mode</h2>
+<p>This chart shows the Device Status which is the Orange Area behind the 
+    two lines over a period of time
+    and also the Energy Mode (FULL MODE(2), ECO MODE(1) IDLE MODE (0)).
+</p>
+<div class="chart-wrapper">
+    @(Html.Kendo().Chart(Model)
+        .Name("chart1")
+        .Title("Device Status | Energy Mode")
+        .Legend(legend => legend
+            .Position(ChartLegendPosition.Bottom)
+        )
+        .Series(series => {
+            series.Area(m => m.DeviceStatus).Name("Device Status");
+            series.Line(m => m.EnergyMode).Name("Energy Mode");
+        })
+        .CategoryAxis(axis => axis
+            .Categories(@ViewBag.TimeLineStampMoney)
+        )
+        .ValueAxis(axis => axis.Numeric()
+            .Labels(labels => labels.Format("{0}"))
+        )
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Format("{0}")
+            .Template("#= series.name #: #= value #")
+        )
+    ) 
+</div>
+
+<p></p>
+<hr />
+<h2>Chart #2 - Door Status Vs Energy Mode</h2>
+<p>This chart shows the Door Status which is the Orange Area behind the 
+    two lines over a period of time
+    and also the Energy Mode (FULL MODE(2), ECO MODE(1) IDLE MODE (0)).
+</p>
+<div class="chart-wrapper">
+    @(Html.Kendo().Chart(Model)
+        .Name("chart2")
+        .Title("Door Status | Energy Mode")
+        .Legend(legend => legend
+            .Position(ChartLegendPosition.Bottom)
+        )
+        .Series(series => {
+            series.Area(m => m.DoorStatus).Name("Device Status");
+            series.Line(m => m.EnergyMode).Name("Energy Mode");
+        })
+        .CategoryAxis(axis => axis
+            .Categories(ViewBag.TimeLineStampMoney)
+        )
+        .ValueAxis(axis => axis.Numeric()
+            .Labels(labels => labels.Format("{0}"))
+        )
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Format("{0}")
+            .Template("#= series.name #: #= value #")
+        )
+    ) 
+</div>
+<p></p>
+<hr />
+<h2>Chart #3 - Energy Savings </h2>
+<p>
+    This chart shows the amount of energy saved pie, 
+    which would have otherwise been spent if we did not use SHAS. 
+    The full pie shows the energy that would have been spent without SHAS, 
+    the energy saved pie shows the current savings of energy
+</p>
+<div class="chart-wrapper">
+    @(Html.Kendo().Chart()
+        .Name("chart3")
+                .Title(title => title
+                    .Text("Energy Savings")
+                    .Position(ChartTitlePosition.Top))
+        .Legend(legend => legend
+            .Visible(false)
+        )
+        .Series(series => {
+            series.Pie(new dynamic[] {
+                new {category="Energy Spent",value=@ViewBag.eSpent,color="#9de219"},
+                new {category="Energy Saved",value=@ViewBag.eSaved,color="#068c35"},
+            })
+            .Labels(labels => labels
+                .Template("#= category #: #= value#kWH")
+                .Background("transparent")
+                .Visible(true)
+            )
+            .StartAngle(150);
+        })
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Format("{0}kW")
+        )
+    ) 
+</div>
+
+<p></p>
+<hr />
+<h2>Chart #4 - Energy Usage Split by Energy Mode</h2>
+<p>
+    This chart shows the split of energy used according to the three 
+    operating modes (FULL, ECO, IDLE).
+    The Inner Donut, shows the amount of time each Energy mode ran on
+    The Outer Donut, shows the amount of energy used for each Energy mode.
+</p>
+<div class="chart-wrapper">
+    @(Html.Kendo().Chart()
+        .Name("chart4")
+        .Title(title => title
+            .Text("Energy Usage by Energy Mode")
+            .Position(ChartTitlePosition.Bottom)
+        )
+        .Legend(legend => legend
+            .Visible(false)
+        )
+        .SeriesDefaults(series =>
+            series.Donut().StartAngle(150)
+        )
+        .Series(series =>
+        {
+            series.Donut(new dynamic[] {
+                new {category = "FULL",value = @ViewBag.fullMM, color="#FF1919"},
+                new {category = "ECO MODE",value = @ViewBag.halfMM, color = "#33CC33"},
+                new {category = "IDLE",value = @ViewBag.zeroMM, color = "#85ADAD"},
+            })
+            .Name("Hours Operated")
+            ;
+            series.Donut(new dynamic[] {
+                new {category = "FULL",value = @ViewBag.fullMU, color="red"},
+                new {category = "ECO MODE",value = @ViewBag.halfMU, color = "green"},
+                new {category = "IDLE",value = @ViewBag.zeroMU, color = "#85ADAD"}
+            })
+            .Name("PowerUsage")
+            .Labels(labels => labels
+                .Visible(true)
+                .Position(ChartPieLabelsPosition.OutsideEnd)
+                .Template("#= category #: #= value#kWH")
+                .Background("transparent")
+            );
+        })
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Template("#= category # (#= series.name #): #= value #m")
+        )
+    ) 
+</div>
+<p></p>
+<hr />
+<h2>Chart #5 - Energy Usage split by Time</h2>
+<p>
+    This chart shows the energy usage by Smart Refrigerator at a given point of time
+</p>
+<div class="chart-wrapper">
+    @(Html.Kendo().Chart(Model)
+        .Name("chart5")
+        .Title("Energy Usage at given time")
+        .Legend(legend => legend
+            .Visible(false)
+        )
+        .ChartArea(chartArea => chartArea
+            .Background("transparent")
+        )
+        .Series(series => {
+            series.Bar(@ViewBag.GContainer).Name("Energy Usage");
+        })
+        .CategoryAxis(axis => axis
+            .Categories(m => m.TimeStamp)
+            .MajorGridLines(lines => lines.Visible(false))
+        )
+        .ValueAxis(axis => axis
+            .Numeric()
+            .Max(4)
+            .Line(line => line.Visible(false))
+            .MajorGridLines(lines => lines.Visible(true))
+        )
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Template("#= series.name #: #= value #kw")
+        )
+    ) 
+</div>
+<p></p>
+<hr />
+<h2>Raw Data - Smart Refrigerator</h2>
+
+<div>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DoorStatus)
+            </th>
+            <th>
+                <label>Operating Mode</label>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeviceStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnergyMode)
+            </th>
+        </tr>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @if (item.DoorStatus.Equals("3")) 
+                { 
+                    <label style="color:green">DOOR CLOSE</label>  
+                }
+                else if (item.DoorStatus.Equals("0")) 
+                { 
+                    <label style="color:blue">DOOR OPEN</label>             
+                }
+            </td>
+            <td>
+                @if (item.EnergyMode.Equals("2")) 
+                { 
+                    <label style="color:red">FULL CAPACITY</label>  
+                }
+                else if (item.EnergyMode.Equals("1")) 
+                { 
+                    <label style="color:orange">REDUCED CAPACITY</label>             
+                }
+                else if (item.EnergyMode.Equals("0")) 
+                { 
+                    <label style="color:gray">IDLE</label>             
+                }
+            </td>
+            <td>
+                @if (item.DeviceStatus.Equals("3")) 
+                { 
+                    <label style="color:red">ON</label>  
+                } 
+                else if (item.DeviceStatus.Equals("0")) 
+                { 
+                    <label style="color:green">OFF</label>             
+                }
+            </td>
+            <td>
+                @if (item.EnergyMode.Equals("2")) 
+                { 
+                    <label style="color:red">PERFORMANCE</label>  
+                }
+                else if (item.EnergyMode.Equals("1")) 
+                { 
+                    <label style="color:green">ECO MODE</label>             
+                }
+                else if (item.EnergyMode.Equals("0")) 
+                { 
+                    <label style="color:gray">IDLE</label>             
+                }
+            </td>
+            <td>
+                <!--
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) 
+                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+                -->
+            </td>
+        </tr>
+    }
+    </table>
+</div>

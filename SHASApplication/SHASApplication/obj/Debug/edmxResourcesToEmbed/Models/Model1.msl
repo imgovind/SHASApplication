@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="shasModelStoreContainer" CdmEntityContainer="shasEntities">
+    <EntitySetMapping Name="configdevicestatus">
+      <EntityTypeMapping TypeName="shasModel.configdevicestatu">
+        <MappingFragment StoreEntitySet="configdevicestatus">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="configsmartplugs">
+      <EntityTypeMapping TypeName="shasModel.configsmartplug">
+        <MappingFragment StoreEntitySet="configsmartplug">
+          <ScalarProperty Name="DeviceThreshold" ColumnName="DeviceThreshold" />
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="configsmartthermostats">
+      <EntityTypeMapping TypeName="shasModel.configsmartthermostat">
+        <MappingFragment StoreEntitySet="configsmartthermostat">
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="DesiredTemperature" ColumnName="DesiredTemperature" />
+          <ScalarProperty Name="CurrentTemperature" ColumnName="CurrentTemperature" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="devices">
+      <EntityTypeMapping TypeName="shasModel.device">
+        <MappingFragment StoreEntitySet="devices">
+          <ScalarProperty Name="DeviceThreshold" ColumnName="DeviceThreshold" />
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="DeviceStatus" ColumnName="DeviceStatus" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="logsmartmeters">
+      <EntityTypeMapping TypeName="shasModel.logsmartmeter">
+        <MappingFragment StoreEntitySet="logsmartmeter">
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="WaterUsed" ColumnName="WaterUsed" />
+          <ScalarProperty Name="EnergyUsed" ColumnName="EnergyUsed" />
+          <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="logsmartrefrigerators">
+      <EntityTypeMapping TypeName="shasModel.logsmartrefrigerator">
+        <MappingFragment StoreEntitySet="logsmartrefrigerator">
+          <ScalarProperty Name="EnergyMode" ColumnName="EnergyMode" />
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="DeviceStatus" ColumnName="DeviceStatus" />
+          <ScalarProperty Name="DoorStatus" ColumnName="DoorStatus" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="logsmartshowers">
+      <EntityTypeMapping TypeName="shasModel.logsmartshower">
+        <MappingFragment StoreEntitySet="logsmartshower">
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="DeviceStatus" ColumnName="DeviceStatus" />
+          <ScalarProperty Name="WaterStatus" ColumnName="WaterStatus" />
+          <ScalarProperty Name="UserSelection" ColumnName="UserSelection" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="logsmartsprinklers">
+      <EntityTypeMapping TypeName="shasModel.logsmartsprinkler">
+        <MappingFragment StoreEntitySet="logsmartsprinkler">
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="DeviceStatus" ColumnName="DeviceStatus" />
+          <ScalarProperty Name="WaterStatus" ColumnName="WaterStatus" />
+          <ScalarProperty Name="DesiredMoisture" ColumnName="DesiredMoisture" />
+          <ScalarProperty Name="CurrentMoisture" ColumnName="CurrentMoisture" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="logsmartwaterheaters">
+      <EntityTypeMapping TypeName="shasModel.logsmartwaterheater">
+        <MappingFragment StoreEntitySet="logsmartwaterheater">
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="EnergyMode" ColumnName="EnergyMode" />
+          <ScalarProperty Name="DeviceStatus" ColumnName="DeviceStatus" />
+          <ScalarProperty Name="DesiredTemperature" ColumnName="DesiredTemperature" />
+          <ScalarProperty Name="CurrentTemperature" ColumnName="CurrentTemperature" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="logsthermostats">
+      <EntityTypeMapping TypeName="shasModel.logsthermostat">
+        <MappingFragment StoreEntitySet="logsthermostat">
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="EnergyMode" ColumnName="EnergyMode" />
+          <ScalarProperty Name="OperatingMode" ColumnName="OperatingMode" />
+          <ScalarProperty Name="DeviceStatus" ColumnName="DeviceStatus" />
+          <ScalarProperty Name="DesiredTemperature" ColumnName="DesiredTemperature" />
+          <ScalarProperty Name="CurrentTemperature" ColumnName="CurrentTemperature" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="shasModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="SecurityAnswer" ColumnName="SecurityAnswer" />
+          <ScalarProperty Name="SecurityQuestion" ColumnName="SecurityQuestion" />
+          <ScalarProperty Name="RememberMe" ColumnName="RememberMe" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="configsmartshowers">
+      <EntityTypeMapping TypeName="shasModel.configsmartshower">
+        <MappingFragment StoreEntitySet="configsmartshower">
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="User4" ColumnName="User4" />
+          <ScalarProperty Name="User3" ColumnName="User3" />
+          <ScalarProperty Name="User2" ColumnName="User2" />
+          <ScalarProperty Name="User1" ColumnName="User1" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="configsmartsprinklers">
+      <EntityTypeMapping TypeName="shasModel.configsmartsprinkler">
+        <MappingFragment StoreEntitySet="configsmartsprinkler">
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="DesiredMoisture" ColumnName="DesiredMoisture" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="configsmartrefrigerators">
+      <EntityTypeMapping TypeName="shasModel.configsmartrefrigerator">
+        <MappingFragment StoreEntitySet="configsmartrefrigerator">
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="configsmartwaterheaters">
+      <EntityTypeMapping TypeName="shasModel.configsmartwaterheater">
+        <MappingFragment StoreEntitySet="configsmartwaterheater">
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="configemergencyauthorities">
+      <EntityTypeMapping TypeName="shasModel.configemergencyauthority">
+        <MappingFragment StoreEntitySet="configemergencyauthorities">
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

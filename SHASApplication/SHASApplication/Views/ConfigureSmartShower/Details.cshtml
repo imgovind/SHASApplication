@@ -1,0 +1,50 @@
+﻿@model SHASApplication.Models.configsmartshower
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>configsmartshower</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User1)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User2)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User2)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User3)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User3)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User4)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User4)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TimeStamp)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TimeStamp)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

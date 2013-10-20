@@ -1,0 +1,13 @@
+﻿@model SHASApplication.Models.device
+
+<div class="device-tile">
+    <div class="bordered">
+        <div class="device-tile-info" style="border-color:black; border:thin; float:left; min-width:250px">    
+            <h2 class="device-id">@Model.ID</h2>
+            <h3 class="device-name">@Html.ActionLink(@Model.Name, "Index", "Log" + @Model.Name.Replace(" ",string.Empty))</h3>
+        </div>
+        <div class="device-tile-status" style="border-color:black; border:thin; float:left; min-width:50px;">
+            <h2 class="device-status" style="color:green">@Model.DeviceStatus</h2>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Message</h1>
+            </hgroup>
+            <p>
+                To learn more about SHAS visit
+                <a href="www.google.com" title="SHAS Website">SHAS</a>.
+                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from SHAS.
+                If you have any questions about SHAS visit
+                <a href="www.google.com" title="SHAS Forum">our forums</a>.
+            </p>
+        </div>
+    </section>
+}
+<h3>We suggest the following:</h3>
+<ol class="round">
+    <li class="one">
+        <h5>Getting Started</h5>
+        SHAS Gives you a powerful user interface to interact with all your devices inside your home from the outside.
+        This is a relatively easy to use interface which is pretty much self explanatory.
+        For more information on various features that the SHAS interface has to offer us, 
+        Click on <a href="www.google.com">Learn more…</a>
+    </li>
+
+    <li class="two">
+        <h5>Add new devices and jump-start your new experience</h5>
+        SHAS makes it easy to install and update the devices and their configuration.
+        <a href="www.google.com">Learn more…</a>
+    </li>
+
+    <li class="three">
+        <h5>Find a technician</h5>
+        You can easily find SHAS certified Technicians/Companies that offers the right mix of features
+        and price for your Home
+        <a href="www.google.com">Learn more…</a>
+    </li>
+
+    <li class="four">
+        <h5>@Html.ActionLink("Comprehensive Weather Information","Weather","Home")</h5>
+    </li>
+</ol>

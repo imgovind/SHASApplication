@@ -1,0 +1,29 @@
+﻿@model IEnumerable<SHASApplication.Models.device>
+
+@{
+    ViewBag.Title = "Monitor";
+}
+@section HeadContent {
+<style>
+    .bordered {
+        max-width:300px;
+        border:1px solid #cc3;
+        background: center no-repeat url('@Url.Content("~/Content/Kendo/shared/world-map.png")');
+        height: 125px;
+        float:left;
+    }
+</style>
+}
+
+<h2 style="float:left">Monitor Devices</h2>
+<p style="visibility:hidden; clear:both; float:left"></p>
+@foreach (var item in Model) {
+    if (item.DeviceStatus.Equals("ON")) 
+    {
+        @Html.Partial("_DeviceTileON", item);    
+    } 
+    else 
+    { 
+        @Html.Partial("_DeviceTileOFF", item);
+    } 
+}

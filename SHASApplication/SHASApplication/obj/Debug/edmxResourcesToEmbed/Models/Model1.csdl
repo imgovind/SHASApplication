@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="shasModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="shasEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="configdevicestatus" EntityType="shasModel.configdevicestatu" />
+    <EntitySet Name="configsmartplugs" EntityType="shasModel.configsmartplug" />
+    <EntitySet Name="configsmartthermostats" EntityType="shasModel.configsmartthermostat" />
+    <EntitySet Name="devices" EntityType="shasModel.device" />
+    <EntitySet Name="logsmartmeters" EntityType="shasModel.logsmartmeter" />
+    <EntitySet Name="logsmartrefrigerators" EntityType="shasModel.logsmartrefrigerator" />
+    <EntitySet Name="logsmartshowers" EntityType="shasModel.logsmartshower" />
+    <EntitySet Name="logsmartsprinklers" EntityType="shasModel.logsmartsprinkler" />
+    <EntitySet Name="logsmartwaterheaters" EntityType="shasModel.logsmartwaterheater" />
+    <EntitySet Name="logsthermostats" EntityType="shasModel.logsthermostat" />
+    <EntitySet Name="users" EntityType="shasModel.user" />
+    <AssociationSet Name="StatusIDFromDeviceStatusTable" Association="shasModel.StatusIDFromDeviceStatusTable">
+      <End Role="configdevicestatu" EntitySet="configdevicestatus" />
+      <End Role="configsmartplug" EntitySet="configsmartplugs" />
+    </AssociationSet>
+    <AssociationSet Name="DeviceIDFromDevice" Association="shasModel.DeviceIDFromDevice">
+      <End Role="device" EntitySet="devices" />
+      <End Role="configsmartplug" EntitySet="configsmartplugs" />
+    </AssociationSet>
+    <EntitySet Name="configsmartshowers" EntityType="shasModel.configsmartshower" />
+    <EntitySet Name="configsmartsprinklers" EntityType="shasModel.configsmartsprinkler" />
+    <EntitySet Name="configsmartrefrigerators" EntityType="shasModel.configsmartrefrigerator" />
+    <EntitySet Name="configsmartwaterheaters" EntityType="shasModel.configsmartwaterheater" />
+    <EntitySet Name="configemergencyauthorities" EntityType="shasModel.configemergencyauthority" />
+  </EntityContainer>
+  <EntityType Name="configdevicestatu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="configsmartplugs" Relationship="shasModel.StatusIDFromDeviceStatusTable" FromRole="configdevicestatu" ToRole="configsmartplug" />
+  </EntityType>
+  <EntityType Name="configsmartplug">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="DeviceID" />
+    <Property Type="Int32" Name="StatusID" />
+    <Property Type="DateTime" Name="TimeStamp" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="configdevicestatu" Relationship="shasModel.StatusIDFromDeviceStatusTable" FromRole="configsmartplug" ToRole="configdevicestatu" />
+    <NavigationProperty Name="device" Relationship="shasModel.DeviceIDFromDevice" FromRole="configsmartplug" ToRole="device" />
+    <Property Type="String" Name="DeviceThreshold" MaxLength="4" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="configsmartthermostat">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CurrentTemperature" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DesiredTemperature" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="StartTime" />
+    <Property Type="DateTime" Name="EndTime" />
+    <Property Type="DateTime" Name="TimeStamp" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="device">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Description" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DeviceStatus" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="TimeStamp" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="configsmartplugs" Relationship="shasModel.DeviceIDFromDevice" FromRole="device" ToRole="configsmartplug" />
+    <Property Type="String" Name="DeviceThreshold" MaxLength="4" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="logsmartmeter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="DeviceID" />
+    <Property Type="String" Name="EnergyUsed" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="WaterUsed" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="TimeStamp" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="logsmartrefrigerator">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="DoorStatus" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DeviceStatus" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="TimeStamp" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="EnergyMode" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="logsmartshower">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="UserSelection" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="WaterStatus" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DeviceStatus" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="TimeStamp" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="logsmartsprinkler">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CurrentMoisture" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DesiredMoisture" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="WaterStatus" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DeviceStatus" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="TimeStamp" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="logsmartwaterheater">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CurrentTemperature" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DesiredTemperature" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DeviceStatus" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EnergyMode" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="TimeStamp" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="logsthermostat">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CurrentTemperature" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DesiredTemperature" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DeviceStatus" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="OperatingMode" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EnergyMode" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="TimeStamp" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Mobile" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Password" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="RememberMe" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SecurityQuestion" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SecurityAnswer" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="TimeStamp" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <Association Name="StatusIDFromDeviceStatusTable">
+    <End Type="shasModel.configdevicestatu" Role="configdevicestatu" Multiplicity="0..1" />
+    <End Type="shasModel.configsmartplug" Role="configsmartplug" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="configdevicestatu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="configsmartplug">
+        <PropertyRef Name="StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DeviceIDFromDevice">
+    <End Type="shasModel.device" Role="device" Multiplicity="0..1" />
+    <End Type="shasModel.configsmartplug" Role="configsmartplug" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="device">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="configsmartplug">
+        <PropertyRef Name="DeviceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="configsmartshower">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="User1" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="User2" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="User3" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="User4" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="TimeStamp" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="configsmartsprinkler">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="DesiredMoisture" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="StartTime" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="TimeStamp" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="configsmartrefrigerator">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="StartTime" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EndTime" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="TimeStamp" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="configsmartwaterheater">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="StartTime" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EndTime" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="TimeStamp" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="configemergencyauthority">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Number" MaxLength="45" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

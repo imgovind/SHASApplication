@@ -1,0 +1,26 @@
+div { 
+    font-family:Verdana, Arial, Sans-Serif; 
+    font-size:10px; 
+}
+
+#mail-header { 
+
+    padding: 10px; 
+    margin: 10px 10px 10px 0px; 
+    float:left; 
+    clear:both;
+}
+
+#mail-message { 
+    padding:10px; 
+    margin:10px 10px 10px 0px; 
+    float:left; 
+    clear:both;
+}
+
+#mail-footer { 
+    padding:10px; 
+    margin:10px 10px 10px 0px; 
+    float:left; 
+    clear:both;
+}
